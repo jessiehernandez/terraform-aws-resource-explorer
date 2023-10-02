@@ -2,16 +2,10 @@
 # OPTIONAL #
 ############
 
-variable "enable_aggregator_index" {
-  default     = false
-  description = "Whether or not to create an aggregator index."
-  type        = bool
-}
-
-variable "enable_local_index" {
-  default     = true
-  description = "Whether or not to create a local index."
-  type        = bool
+variable "index_type" {
+  default     = "LOCAL"
+  description = "The type of index to create (either 'LOCAL' or 'AGGREGATOR')."
+  type        = string
 }
 
 variable "tags" {

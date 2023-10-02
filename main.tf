@@ -1,17 +1,10 @@
-resource "aws_resourceexplorer2_index" "aggregator" {
-  count = var.enable_aggregator_index ? 1 : 0
-  tags  = var.tags
-  type  = "AGGREGATOR"
-}
-
-resource "aws_resourceexplorer2_index" "local" {
-  count = var.enable_local_index ? 1 : 0
-  tags  = var.tags
-  type  = "LOCAL"
+resource "aws_resourceexplorer2_index" "this" {
+  tags = var.tags
+  type = var.index_type
 }
 
 resource "aws_resourceexplorer2_view" "this" {
-  depends_on = [aws_resourceexplorer2_index.local]
+  depends_on = [aws_resourceexplorer2_index.this]
   for_each   = var.views
 
   default_view = try(each.value.default_view, false)
